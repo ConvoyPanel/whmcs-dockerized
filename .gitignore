@@ -2,3 +2,4 @@ src/*
 !src/convoy
 src/logs/*
 !src/logs/
+.env
