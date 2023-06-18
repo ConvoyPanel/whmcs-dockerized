@@ -46,6 +46,16 @@ services:
       - ./src/:/var/www/
     extra_hosts:
       host.docker.internal: host-gateway
+  workers:
+    build:
+      context: ./dockerfiles/workers
+      args:
+        - APP_ENV=$APP_ENV
+    restart: unless-stopped
+    volumes:
+      - ./src/:/var/www/
+    depends_on:
+      - database
   database:
     image: mysql:8.0.29
     restart: unless-stopped
