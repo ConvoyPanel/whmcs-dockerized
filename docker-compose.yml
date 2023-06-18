@@ -7,7 +7,7 @@ services:
         - APP_URL=$APP_URL
     restart: unless-stopped
     volumes:
-      - ./src/whmcs:/var/www/
+      - ./src/:/var/www/
       - ./dockerfiles/caddy/data/config:/config
       - ./dockerfiles/caddy/data/data:/data
     ports:
@@ -25,7 +25,7 @@ services:
         - PHP_XDEBUG_MODE=$PHP_XDEBUG_MODE
     restart: unless-stopped
     volumes:
-       - ./src/whmcs:/var/www/
+       - ./src/:/var/www/
     expose:
       - 9000
     depends_on:
@@ -43,7 +43,7 @@ services:
     ports:
       - 1234:1234
     volumes:
-      - ./src/whmcs:/var/www/
+      - ./src/:/var/www/
     extra_hosts:
       host.docker.internal: host-gateway
   database:

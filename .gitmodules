@@ -1,0 +1,3 @@
+[submodule "src/convoy"]
+	path = src/convoy
+	url = https://github.com/ConvoyPanel/whmcs.git
