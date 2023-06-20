@@ -14,9 +14,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions pdo_mysql pcntl redis opcache ioncube gd
-RUN echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
-RUN echo "opcache.validate_timestamps=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache-cli.ini
+RUN install-php-extensions pdo_mysql pcntl redis ioncube gd zip
 
 RUN if [ $PHP_XDEBUG = "true" ]; then \
             install-php-extensions xdebug; \

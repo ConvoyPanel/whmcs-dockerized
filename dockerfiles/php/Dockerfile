@@ -7,11 +7,7 @@ ENV PHP_IDE_CONFIG="serverName=convoy"
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
-RUN install-php-extensions pdo_mysql pcntl redis opcache ioncube gd
-
-RUN if [ $APP_ENV = "local" ]; then \
-                echo "opcache.validate_timestamps=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache-cli.ini; \
-        fi;
+RUN install-php-extensions pdo_mysql pcntl redis ioncube gd zip
 
 RUN if [ $PHP_XDEBUG = "true" ]; then \
             install-php-extensions xdebug; \
