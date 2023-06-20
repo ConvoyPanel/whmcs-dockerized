@@ -20,4 +20,6 @@ RUN if [ $PHP_XDEBUG = "true" ]; then \
 
 COPY ./whmcs.conf /etc/apache2/sites-available/whmcs.conf
 
+RUN a2ensite whmcs
+
 WORKDIR /var/www/html
