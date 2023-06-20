@@ -1,7 +1,0 @@
-{$APP_URL}, :80 {
-    tls internal
-    root * /var/www/whmcs
-    php_fastcgi php:9000
-    encode gzip
-    file_server
-}

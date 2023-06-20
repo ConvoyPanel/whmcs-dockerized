@@ -1,21 +1,4 @@
 services:
-  caddy:
-    build:
-      context: ./dockerfiles/caddy
-      args:
-        - APP_ENV=$APP_ENV
-        - APP_URL=$APP_URL
-    restart: unless-stopped
-    volumes:
-      - ./src/:/var/www/
-      - ./dockerfiles/caddy/data/config:/config
-      - ./dockerfiles/caddy/data/data:/data
-    ports:
-      - 80:80
-      - 443:443
-    depends_on:
-      - php
-    env_file: .env
   php:
     build:
       context: ./dockerfiles/php
@@ -25,9 +8,10 @@ services:
         - PHP_XDEBUG_MODE=$PHP_XDEBUG_MODE
     restart: unless-stopped
     volumes:
-       - ./src/:/var/www/
-    expose:
-      - 9000
+       - ./src/:/var/www/html
+    ports:
+      - 80:80
+      - 443:443
     depends_on:
       - database
     env_file: .env
@@ -43,7 +27,7 @@ services:
     ports:
       - 1234:1234
     volumes:
-      - ./src/:/var/www/
+      - ./src/:/var/www/html
     extra_hosts:
       host.docker.internal: host-gateway
   workers:
@@ -53,7 +37,7 @@ services:
         - APP_ENV=$APP_ENV
     restart: unless-stopped
     volumes:
-      - ./src/:/var/www/
+      - ./src/:/var/www/html
     depends_on:
       - database
   database:

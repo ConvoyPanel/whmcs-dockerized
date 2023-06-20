@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.1-apache
 
 ARG PHP_XDEBUG
 ARG PHP_XDEBUG_MODE='debug'
@@ -18,8 +18,6 @@ RUN if [ $PHP_XDEBUG = "true" ]; then \
             echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini; \
         fi;
 
-RUN echo 'pm.max_children = 100' >> /usr/local/etc/php-fpm.d/zz-docker.conf
+COPY ./whmcs.conf /etc/apache2/sites-available/whmcs.conf
 
-WORKDIR /var/www
-
-CMD ["php-fpm"]
+WORKDIR /var/www/html
