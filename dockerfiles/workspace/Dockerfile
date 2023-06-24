@@ -33,4 +33,4 @@ RUN sudo mv composer.phar /usr/local/bin/composer
 
 RUN echo "alias art='php artisan'" >> ~/.bashrc
 
-WORKDIR /var/www/html
+WORKDIR /var/www
